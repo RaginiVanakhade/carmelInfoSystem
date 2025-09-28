@@ -1,3 +1,4 @@
+// // first login page
 // import React, { useState } from "react";
 // import { FaUserCircle, FaLock, FaGoogle, FaFacebook, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
@@ -10,18 +11,18 @@
 
 //   return (
 //     <div className="body flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-200 to-blue-200">
-//       <div className={`container relative w-[850px] h-[550px] bg-white rounded-[30px] shadow-xl overflow-hidden flex ${!isLoginActive ? "active" : ""}`}>
+//       <div className={`container relative md:w-[850px] sm:h-[550px]  h-[550px] md:h-[550px] sm:w-[650px] w-[550px] bg-white rounded-[30px] shadow-xl overflow-hidden flex ${!isLoginActive ? "active" : ""}`}>
 
 //         {/* Login Form */}
 //         <div className={`form-box z-[10] p-10 absolute w-1/2 h-full bg-white flex flex-col items-center justify-center text-center transition-all duration-700
 //           ${isLoginActive ? "right-0 opacity-100" : "right-[-50%] opacity-0"}`}>
-//           <h1 className="text-[30px] mb-6">Login</h1>
+//           <h1 className="text-[30px] mb-6 font-heading">Login</h1>
 //           <div className="input-box relative flex w-full my-2.5">
 //             <input
 //               type="text"
 //               placeholder="Username"
 //               required
-//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px]"
+//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px] font-display"
 //             />
 //             <FaUserCircle className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[20px] text-[#888]" />
 //           </div>
@@ -30,12 +31,12 @@
 //               type="password"
 //               placeholder="Password"
 //               required
-//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px]"
+//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px] font-display"
 //             />
 //             <FaLock className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[20px] text-[#888]" />
 //           </div>
 //           <div className="forgot-pass my-[-10px] w-full text-right mb-4">
-//             <a href="#" className="text-blue-600 hover:underline">Forgot Password?</a>
+//             <a href="#" className="text-blue-600 hover:underline ">Forgot Password?</a>
 //           </div>
 //           <button
 //             type="submit"
@@ -43,8 +44,8 @@
 //           >
 //             Login
 //           </button>
-//           <p className="text-[14.5px] my-2 text-gray-600">or login with social platforms</p>
-//           <div className="social-icons flex justify-center mt-2">
+//           <p className="text-[14.5px] my-2 text-gray-600 font-display">or login with social platforms</p>
+//           <div className="social-icons flex justify-center mt-2 flex-wrap">
 //             <FaGoogle className="p-1 border-2 border-[#ccc] rounded-4xl text-3xl mx-2 cursor-pointer text-black" />
 //             <FaFacebook className="p-1 border-2 border-[#ccc] rounded-4xl text-3xl mx-2 cursor-pointer text-black" />
 //             <FaGithub className="p-1 border-2 border-[#ccc] rounded-4xl text-3xl mx-2 cursor-pointer text-black" />
@@ -61,7 +62,7 @@
 //               type="text"
 //               placeholder="Username"
 //               required
-//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px]"
+//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px] font-display"
 //             />
 //             <FaUserCircle className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[20px] text-[#888]" />
 //           </div>
@@ -70,7 +71,7 @@
 //               type="email"
 //               placeholder="Email"
 //               required
-//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px]"
+//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px] font-display"
 //             />
 //             <FaEnvelope className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[20px] text-[#888]" />
 //           </div>
@@ -79,7 +80,7 @@
 //               type="password"
 //               placeholder="Password"
 //               required
-//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px]"
+//               className="w-full rounded-[8px] p-[13px] bg-[#eee] outline-none text-[16px] font-medium pr-[50px] font-display"
 //             />
 //             <FaLock className="absolute right-5 top-1/2 transform -translate-y-1/2 text-[20px] text-[#888]" />
 //           </div>
@@ -119,41 +120,58 @@
 
 
 
+
+// second login page 
 import React from 'react'
-import { FaUserCircle, FaLock, FaGoogle, FaFacebook, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
-// colors 
-// btn = rgba(#141830) = PRIMANY BRAND
-// btn = rgba(202339) = BUTTON
-// btn = rgba(353749) = BACKGROUND
-// btn = rgba(4F5269) = HOVER BTN AND OTHER EFFECTS
-// btn = rgba(607086) = TEXT
-
-
+import { FiUnlock } from "react-icons/fi";
+import { FaRegUser } from "react-icons/fa";
 
 const Login = () => {
   return (
-    <div className="md:h-screen sm:h-screen h-screen md:w-screen sm:w-screen w-screen items-center flex justify-center">
-     <div className='border w-76 sm:w-86 md:w-96 h-96 sm:h-96 md:h'>
-       <div className='items-center flex justify-center mt-10' ><FaUserCircle  size={70}/></div>
-      <h2 className='flex justify-center items-center mt-6'>User Login</h2>
-      <div className='flex items-center justify-center mt-6'>
-         <form action="">
-        <div className=''>
-          <label htmlFor="username" className='mt-1'>Username</label><br />
-          <input type="text" id='username' className='w-76 border' />
-        </div>
-        <div cl>
-          <label htmlFor="password" className='mt-1'>Password</label><br />
-          <input type="password" id='password' className='w-76 border' />
-        </div>
-        <div className='mt-4 flex justify-center items-center'>
-    <input type="submit" id="login" value="Login" />
-        </div>
-      </form>
+    <div className="h-screen w-screen flex justify-center items-center bg-gradient-to-r from-[#141830] via-[#202339] to-[#353749]">
+      <div className="backdrop-blur-md bg-white/10 border border-white/20 shadow-xl rounded-2xl p-8 w-80 sm:w-96">
+        <h2 className="text-center text-2xl font-semibold text-white mb-8">User Login</h2>
+        
+        <form action="">
+          {/* Username field */}
+          <div className="relative mb-6">
+            <input
+              type="text"
+              id="username"
+              className="w-full h-12 pl-12 pr-4 rounded-3xl bg-transparent border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4F5269] font-display"
+              placeholder="Username"
+            />
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white">
+              <FaRegUser size={22} />
+            </div>
+          </div>
+
+          {/* Password field */}
+          <div className="relative mb-6">
+            <input
+              type="password"
+              id="password"
+              className="w-full h-12 pl-4 pr-12 rounded-3xl bg-transparent border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4F5269] font-display"
+              placeholder="Password"
+            />
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white">
+              <FiUnlock size={22} />
+            </div>
+          </div>
+
+          {/* Login button */}
+          <div className="mt-6">
+            <input
+              type="submit"
+              id="login"
+              value="Login"
+              className="w-full h-12 rounded-3xl bg-[#202339]/80 hover:bg-[#4F5269] text-white font-medium cursor-pointer transition"
+            />
+          </div>
+        </form>
       </div>
-     </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
