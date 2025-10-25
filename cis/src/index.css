@@ -13,7 +13,23 @@
 
 
 }
-.toggle-box {
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(60deg, #e2e2e2, #c9d6ff);
+}
+
+/* .toggle-box {
   position: relative;
   width: 50%;
   height: 100%;
@@ -25,10 +41,10 @@
   overflow: hidden;
   z-index: 10;
   transition: 1.8s ease-in-out;
-}
+} */
 
 /* Moving background effect */
-.toggle-box::before {
+/* .toggle-box::before {
   content: '';
   position: absolute;
   width: 300%;
@@ -39,9 +55,14 @@
   top: 0;
   z-index: -1;
   transition: 1.8s ease-in-out;
-}
+  background-position: left;
+} */
 
 /* When signup is active, slide background */
-.container.active .toggle-box::before {
+/* .container.active .toggle-box::before {
   left: 0;
-}
+} */
+
+/* .login{
+  font-family: "Edu AU VIC WA NT Guides", cursive;
+} */
