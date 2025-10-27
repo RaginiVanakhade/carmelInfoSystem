@@ -198,8 +198,7 @@ left: 50%;
   .form-box {
     bottom: 0;
     width: 100%;
-    height: 70%;
-    
+    height: 66%;
   }
 
   .container.active .form-box {
@@ -214,6 +213,7 @@ left: 50%;
     width: 100%;
     height: 300%;
     border-radius: 20vw;
+    margin-top: 25px;
   }
 
   .container.active .toggle-box::before {
@@ -225,15 +225,16 @@ left: 50%;
     width: 100%;
     height: 30%;
     z-index: 3; /* ensure visible */
+
   }
 
   .toggle-panel.toggle-left {
     top: 0;
+    
   }
 
   .container.active .toggle-panel.toggle-left {
-    left: 0;
-    top: 30%;
+    left: 100%;
   }
 
   /* ✅ fixed spelling and positioning */
@@ -252,6 +253,7 @@ left: 50%;
 @media screen and (max-width: 400px) { 
   .form-box {
     padding: 20px;
+    margin: 30px;
   }
 
   .toggle-panel h1 {

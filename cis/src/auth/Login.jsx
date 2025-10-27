@@ -63,7 +63,7 @@ const Login = () => {
       {/* ---------------- SIGNUP FORM ---------------- */}
       <div className="form-box signup">
         <form>
-          <h1>Sign Up</h1>
+          <h1 className="signup">Sign Up</h1>
           <div className="input-box flex">
             <input type="text" placeholder="username" required />
             <i className="bx bx-user">
