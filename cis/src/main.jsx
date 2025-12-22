@@ -8,17 +8,17 @@ import {
 } from 'react-router-dom'
 import Login from './auth/Login.jsx'
 // import SignUp from './auth/SignUp.jsx'
-
+import Dashboard from './component/Dashboard.jsx'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Login />,
   },
-  // {
-  //   path: '/signup',
-  //   element: <SignUp />
-  // },
+  {
+    path: '/Dashboard',
+    element: <Dashboard />
+  },
 ])
 
 createRoot(document.getElementById('root')).render(

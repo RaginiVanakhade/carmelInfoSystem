@@ -1,123 +1,56 @@
-import { useState } from "react";
-import {
-  FaUserCircle,
-  FaLock,
-  FaGoogle,
-  FaFacebook,
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-} from "react-icons/fa";
-import "../style/login.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/authservices";
 
 const Login = () => {
-  // useState to manage which form is active
-  const [isSignUpActive, setIsSignUpActive] = useState(false);
+  const [uid, setUid] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleRegisterClick = () => {
-    setIsSignUpActive(true);
-  };
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
 
-  const handleLoginClick = () => {
-    setIsSignUpActive(false);
-  };
+  try {
+    const res = await authService.login(uid, pwd);
+
+    if (res.data.status === 200) {
+      navigate("/dashboard");
+    } else {
+      setError("Login failed");
+    }
+  } catch (err) {
+    console.error(err);
+    setError("Invalid username or password");
+  }
+};
+
 
   return (
-    <div className={`container ${isSignUpActive ? "active" : ""}`}>
-      {/* ---------------- LOGIN FORM ---------------- */}
-      <div className="form-box login">
-        <form>
-          <h1>Login</h1>
-          <div className="input-box flex">
-            <input type="text" placeholder="username" required />
-            <i className="bx bx-user">
-              <FaUserCircle />
-            </i>
-          </div>
+    <form onSubmit={handleLogin}>
+      <h2>Login</h2>
 
-          <div className="input-box flex">
-            <input type="password" placeholder="password" required />
-            <i className="bx bx-lock-alt">
-              <FaLock />
-            </i>
-          </div>
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <div className="forgot-link">
-            <a href="#">Forgot Password?</a>
-          </div>
+      <input
+        type="text"
+        placeholder="User ID"
+        value={uid}
+        onChange={(e) => setUid(e.target.value)}
+        required
+      />
 
-          <button type="submit" className="btn">
-            Login
-          </button>
+      <input
+        type="password"
+        placeholder="Password"
+        value={pwd}
+        onChange={(e) => setPwd(e.target.value)}
+        required
+      />
 
-          <p>or login with social platforms</p>
-          <div className="social-icons flex">
-            <a href="#"><FaGoogle className="social-icon" /></a>
-            <a href="#"><FaFacebook className="social-icon" /></a>
-            <a href="#"><FaGithub className="social-icon" /></a>
-            <a href="#"><FaLinkedin className="social-icon" /></a>
-          </div>
-        </form>
-      </div>
-
-      {/* ---------------- SIGNUP FORM ---------------- */}
-      <div className="form-box signup">
-        <form>
-          <h1 className="signup">Sign Up</h1>
-          <div className="input-box flex">
-            <input type="text" placeholder="username" required />
-            <i className="bx bx-user">
-              <FaUserCircle />
-            </i>
-          </div>
-
-          <div className="input-box flex">
-            <input type="email" placeholder="email" required />
-            <i className="bx bx-envelope">
-              <FaEnvelope />
-            </i>
-          </div>
-
-          <div className="input-box flex">
-            <input type="password" placeholder="password" required />
-            <i className="bx bx-lock-alt">
-              <FaLock />
-            </i>
-          </div>
-
-          <button type="submit" className="btn">
-            Sign Up
-          </button>
-
-          <p>or Sign Up with social platforms</p>
-          <div className="social-icons flex">
-            <a href="#"><FaGoogle className="social-icon" /></a>
-            <a href="#"><FaFacebook className="social-icon" /></a>
-            <a href="#"><FaGithub className="social-icon" /></a>
-            <a href="#"><FaLinkedin className="social-icon" /></a>
-          </div>
-        </form>
-      </div>
-
-      {/* ---------------- TOGGLE BOX ---------------- */}
-      <div className="toggle-box">
-        <div className="toggle-panel toggle-left">
-          <h1>Hello, Welcome!</h1>
-          <p>Don't have an account?</p>
-          <button className="btn signup-btn" onClick={handleRegisterClick}>
-            Sign Up
-          </button>
-        </div>
-
-        <div className="toggle-panel toggle-right">
-          <h1>Welcome Back!</h1>
-          <p>Already have an account?</p>
-          <button className="btn login-btn" onClick={handleLoginClick}>
-            Login
-          </button>
-        </div>
-      </div>
-    </div>
+      <button type="submit">Login</button>
+    </form>
   );
 };
 
