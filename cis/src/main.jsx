@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom'
 import Login from './auth/Login.jsx'
 // import SignUp from './auth/SignUp.jsx'
-import Home from './component/Home.jsx'
+import Home from '../src/pages/Home.jsx'
 
 const router = createBrowserRouter([
   {
