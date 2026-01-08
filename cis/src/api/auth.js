@@ -1,0 +1,1 @@
+export const AuthLogin = 'https://rentitsupport.com/API/Athenticate'
