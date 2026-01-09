@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Drawer,
   List,
   ListItemButton,
   ListItemText,
+  Collapse,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
 
 const NAVBAR_HEIGHT = 64;
 const DRAWER_WIDTH = 250;
 
-const menuItems = [
-  { label: "Dashboard", path: "/dashboard" },
-  { label: "Company Master", path: "/master/comapymaster" },
+const masterItems = [
+  { label: "Company Master", path: "/master/companymaster" },
   { label: "Book Status Master", path: "/master/bookstatesmaster" },
   { label: "Customer Master", path: "/master/customermaster" },
   { label: "Vendor Master", path: "/master/vendormaster" },
@@ -25,6 +27,16 @@ const menuItems = [
 ];
 
 const SideBar = ({ open }) => {
+  const location = useLocation();
+  const [mastersOpen, setMastersOpen] = useState(false);
+
+  // 👉 Open Master menu automatically if route starts with /master
+  useEffect(() => {
+    if (location.pathname.startsWith("/master")) {
+      setMastersOpen(true);
+    }
+  }, [location.pathname]);
+
   return (
     <Drawer
       variant="persistent"
@@ -43,21 +55,49 @@ const SideBar = ({ open }) => {
     >
       <Box>
         <List>
-          {menuItems.map((item) => (
-            <ListItemButton
-              key={item.path}
-              component={NavLink}
-              to={item.path}
-              sx={{
-                "&.active": {
-                  backgroundColor: "#1976d2",
-                  color: "#fff",
-                },
-              }}
-            >
-              <ListItemText primary={item.label} />
-            </ListItemButton>
-          ))}
+
+          {/* Dashboard */}
+          <ListItemButton
+            component={NavLink}
+            to="/dashboard"
+            sx={{
+              "&.active": {
+                backgroundColor: "#1976d2",
+                color: "#fff",
+              },
+            }}
+          >
+            <ListItemText primary="Dashboard" />
+          </ListItemButton>
+
+          {/* Master Parent */}
+          <ListItemButton onClick={() => setMastersOpen(!mastersOpen)}>
+            <ListItemText primary="Master" />
+            {mastersOpen ? <RemoveIcon /> : <AddIcon />}
+          </ListItemButton>
+
+          {/* Master Submenu */}
+          <Collapse in={mastersOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {masterItems.map((item) => (
+                <ListItemButton
+                  key={item.path}
+                  component={NavLink}
+                  to={item.path}
+                  sx={{
+                    pl: 4,
+                    "&.active": {
+                      backgroundColor: "#1976d2",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <ListItemText primary={item.label} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Collapse>
+
         </List>
       </Box>
     </Drawer>
