@@ -21,7 +21,7 @@ const Login = () => {
     try {
       const res = await authService.login(uid, pwd);
       if (res.data.status === 200) {
-        navigate("/home");
+        navigate("/dashboard");
       } else {
         setError("Login failed");
       }

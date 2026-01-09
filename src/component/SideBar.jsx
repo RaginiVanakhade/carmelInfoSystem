@@ -6,9 +6,23 @@ import {
   ListItemButton,
   ListItemText,
 } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const NAVBAR_HEIGHT = 64;
 const DRAWER_WIDTH = 250;
+
+const menuItems = [
+  { label: "Dashboard", path: "/dashboard" },
+  { label: "Company Master", path: "/master/comapymaster" },
+  { label: "Book Status Master", path: "/master/bookstatesmaster" },
+  { label: "Customer Master", path: "/master/customermaster" },
+  { label: "Vendor Master", path: "/master/vendormaster" },
+  { label: "Service Product Master", path: "/master/serviceproductmaster" },
+  { label: "Skills Category Master", path: "/master/skillscategorymaster" },
+  { label: "Skill Master", path: "/master/skillmaster" },
+  { label: "Country Master", path: "/master/countrymaster" },
+  { label: "State Master", path: "/master/statemaster" },
+];
 
 const SideBar = ({ open }) => {
   return (
@@ -29,13 +43,21 @@ const SideBar = ({ open }) => {
     >
       <Box>
         <List>
-          <ListItemButton>
-            <ListItemText primary="Dashboard" />
-          </ListItemButton>
-
-          <ListItemButton>
-            <ListItemText primary="Settings" />
-          </ListItemButton>
+          {menuItems.map((item) => (
+            <ListItemButton
+              key={item.path}
+              component={NavLink}
+              to={item.path}
+              sx={{
+                "&.active": {
+                  backgroundColor: "#1976d2",
+                  color: "#fff",
+                },
+              }}
+            >
+              <ListItemText primary={item.label} />
+            </ListItemButton>
+          ))}
         </List>
       </Box>
     </Drawer>
