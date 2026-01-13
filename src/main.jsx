@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     path: "/master",
     element: <HomeLayout />,
     children: [
-      { path: "comapymaster", element: <CompanyMst /> },
+      { path: "companymaster", element: <CompanyMst /> },
       { path: "bookstatesmaster", element: <BookStatesMst /> },
       { path: "customermaster", element: <CustomerMst /> },
       { path: "vendormaster", element: <VendorMst /> },
