@@ -7,35 +7,24 @@ import {
   ListItemText,
   Collapse,
   Typography,
+  Avatar,
 } from "@mui/material";
 import { NavLink, useLocation } from "react-router-dom";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaChevronDown } from "react-icons/fa";
-import Avatar from "@mui/material/Avatar";
-import CustomeSearch from "./custom/CustomeSearch"
+import { PiSquaresFourFill } from "react-icons/pi";
+import CustomeSearch from "./custom/CustomeSearch";
+import { masterItems } from "../listingData/SideBarItem";
 
 const NAVBAR_HEIGHT = 64;
 const DRAWER_WIDTH = 250;
-
-const masterItems = [
-  { label: "Company Master", path: "/master/companymaster" },
-  { label: "Book Status Master", path: "/master/bookstatesmaster" },
-  { label: "Customer Master", path: "/master/customermaster" },
-  { label: "Vendor Master", path: "/master/vendormaster" },
-  { label: "Service Product Master", path: "/master/serviceproductmaster" },
-  { label: "Skills Category Master", path: "/master/skillscategorymaster" },
-  { label: "Skill Master", path: "/master/skillmaster" },
-  { label: "Country Master", path: "/master/countrymaster" },
-  { label: "State Master", path: "/master/statemaster" },
-];
 
 const SideBar = ({ open }) => {
   const location = useLocation();
   const [mastersOpen, setMastersOpen] = useState(false);
 
-  // 👉 Open Master menu automatically if route starts with /master
   useEffect(() => {
     if (location.pathname.startsWith("/master")) {
       setMastersOpen(true);
@@ -55,87 +44,104 @@ const SideBar = ({ open }) => {
           boxSizing: "border-box",
           top: NAVBAR_HEIGHT,
           height: `calc(100% - ${NAVBAR_HEIGHT}px)`,
-          marginTop: "20px",
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden",
         },
       }}
     >
-      <Box alignItems="center">
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Avatar
-            src="https://i.pravatar.cc/300"
-            sx={{ width: 36, height: 36 }}
-          />
+      {/* ===== HEADER ===== */}
+      <Box
+        sx={{
+          height: 100,
+          backgroundImage:
+            'url("https://images.unsplash.com/photo-1503264116251-35a269479413")',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          p: 2,
+          flexShrink: 0,
+        }}
+      >
+        <Box display="flex" justifyContent="center">
+          <Avatar src="https://i.pravatar.cc/300" sx={{ width: 36, height: 36 }} />
         </Box>
 
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <Typography sx={{ mx: 1, fontSize: 16, fontWeight: 500 }}>
+        <Box display="flex" justifyContent="center" alignItems="center" mt={1}>
+          <Typography sx={{ fontSize: 16, fontWeight: 500, color: "#fff", mr: 0.5 }}>
             Carmel
           </Typography>
-
-          <FaChevronDown />
+          <FaChevronDown color="#fff" />
         </Box>
       </Box>
 
-
-      <Box>
-         <CustomeSearch />
+      {/* ===== SEARCH ===== */}
+      <Box sx={{ p: 1, flexShrink: 0 }}>
+        <CustomeSearch />
       </Box>
 
-      <Box>
+      {/* ===== SCROLLABLE MENU (VISIBLE SCROLLBAR) ===== */}
+      <Box
+        sx={{
+          flexGrow: 1,
+          overflowY: "scroll", // 🔑 always visible scrollbar
+        }}
+      >
         <List>
-          <Typography
-            fontSize="16px"
-            fontWeight={100}
-            margin="12px"
-            color="#1976d2"
-          >
+          <Typography sx={{ fontSize: 13, fontWeight: 500, pl: 2, color: "#1976d2" }}>
             Navigation
           </Typography>
-          {/* Dashboard */}
+
           <ListItemButton
             component={NavLink}
             to="/dashboard"
             sx={{
+              mx: 1,
+              borderRadius: "6px",
+              color: "#555",
               "&.active": {
                 backgroundColor: "#1976d2",
                 color: "#fff",
-                margin: "8px",
               },
             }}
-            color="text-muted"
           >
-            <div className="m-2px">
-              <AiOutlineHome />
-            </div>
-            <ListItemText primary="Dashboard" />
+            <AiOutlineHome size={18} />
+            <ListItemText
+              primary="Dashboard"
+              slotProps={{ primary: { sx: { fontSize: 14, ml: 1 } } }}
+            />
           </ListItemButton>
 
-          {/* Master Parent */}
-          <ListItemButton onClick={() => setMastersOpen(!mastersOpen)}>
+          <Typography
+            sx={{
+              fontSize: 13,
+              fontWeight: 500,
+              pl: 2,
+              mt: 2,
+              color: "#1976d2",
+            }}
+          >
+            Menu
+          </Typography>
+
+          <ListItemButton
+            onClick={() => setMastersOpen(!mastersOpen)}
+            sx={{ mx: 1, borderRadius: "6px", color: "#555" }}
+          >
+            <PiSquaresFourFill size={18} />
             <ListItemText
               primary="Masters"
-              slotProps={{
-                primary: {
-                  sx: {
-                    color: "#1976d2",
-                  },
-                },
-              }}
+              slotProps={{ primary: { sx: { fontSize: 14, ml: 1 } } }}
             />
-            {mastersOpen ? <RemoveIcon /> : <AddIcon />}
+            {mastersOpen ? (
+              <RemoveIcon sx={{ fontSize: 16 }} />
+            ) : (
+              <AddIcon sx={{ fontSize: 16 }} />
+            )}
           </ListItemButton>
 
-          {/* Master Submenu */}
           <Collapse in={mastersOpen} timeout="auto" unmountOnExit>
-            <List
-              component="div"
-              disablePadding
-              sx={{
-                ml: 4,
-                borderLeft: "1px solid #cfcfcf",
-                
-              }}
-            >
+            <List sx={{ ml: 3, borderLeft: "1px solid #cfcfcf" }}>
               {masterItems.map((item) => (
                 <ListItemButton
                   key={item.path}
@@ -144,47 +150,34 @@ const SideBar = ({ open }) => {
                   sx={{
                     pl: 2,
                     position: "relative",
-
-                    /* DOT */
+                    color: "#555",
                     "&::before": {
                       content: '""',
                       position: "absolute",
-                      left: -4,
+                      left: -3,
                       top: "50%",
                       transform: "translateY(-50%)",
-                      width: 7,
-                      height: 7,
+                      width: 6,
+                      height: 6,
                       borderRadius: "50%",
                       backgroundColor: "#9e9e9e",
-                      transition: "all 0.2s ease",
                     },
-
-                    /* TEXT */
-                    color: "#555",
-                    transition: "all 0.2s ease",
-
-                    /* HOVER */
                     "&:hover": {
                       color: "#1976d2",
                       backgroundColor: "transparent",
-
-                      "&::before": {
-                        backgroundColor: "#1976d2",
-                      },
+                      "&::before": { backgroundColor: "#1976d2" },
                     },
-
-                    /* ACTIVE */
                     "&.active": {
                       color: "#1976d2",
                       fontWeight: 600,
-
-                      "&::before": {
-                        backgroundColor: "#1976d2",
-                      },
+                      "&::before": { backgroundColor: "#1976d2" },
                     },
                   }}
                 >
-                  <ListItemText primary={item.label} />
+                  <ListItemText
+                    primary={item.label}
+                    slotProps={{ primary: { sx: { fontSize: 14 } } }}
+                  />
                 </ListItemButton>
               ))}
             </List>
