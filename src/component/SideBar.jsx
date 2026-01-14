@@ -21,6 +21,57 @@ import { masterItems } from "../listingData/SideBarItem";
 const NAVBAR_HEIGHT = 64;
 const DRAWER_WIDTH = 250;
 
+/* ---------- Shared Styles ---------- */
+const navItemStyle = {
+  mx: 1,
+  borderRadius: "6px",
+  color: "#555",
+  "&.active": {
+    backgroundColor: "#1976d2",
+    color: "#fff",
+  },
+};
+
+const subItemStyle = {
+  pl: 2,
+  position: "relative",
+  color: "#555",
+
+  /* Dot (hidden by default) */
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    left: -5,
+    top: "50%",
+    transform: "translateY(-50%)",
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    backgroundColor: "#1976d2",
+    opacity: 0,
+    transition: "opacity 0.2s ease",
+  },
+
+  /* Hover effect */
+  "&:hover": {
+    color: "#1976d2",
+    backgroundColor: "transparent",
+    "&::before": {
+      opacity: 1,
+    },
+  },
+
+  /* Active (clicked / current route) */
+  "&.active": {
+    color: "#1976d2",
+    fontWeight: 600,
+    "&::before": {
+      opacity: 1,
+    },
+  },
+};
+
+
 const SideBar = ({ open }) => {
   const location = useLocation();
   const [mastersOpen, setMastersOpen] = useState(false);
@@ -30,6 +81,8 @@ const SideBar = ({ open }) => {
       setMastersOpen(true);
     }
   }, [location.pathname]);
+
+  const toggleMasters = () => setMastersOpen((prev) => !prev);
 
   return (
     <Drawer
@@ -50,13 +103,12 @@ const SideBar = ({ open }) => {
         },
       }}
     >
-      {/* ===== HEADER ===== */}
+      {/* ---------- HEADER ---------- */}
       <Box
         sx={{
           height: 100,
           backgroundImage:
             'url("https://images.unsplash.com/photo-1503264116251-35a269479413")',
-          backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
           p: 2,
@@ -75,18 +127,13 @@ const SideBar = ({ open }) => {
         </Box>
       </Box>
 
-      {/* ===== SEARCH ===== */}
-      <Box sx={{ p: 1, flexShrink: 0 }}>
+      {/* ---------- SEARCH ---------- */}
+      <Box sx={{ p: 1, flexShrink: 0, borderBottom: "1px solid #ccc" , margin:2 }}>
         <CustomeSearch />
       </Box>
 
-      {/* ===== SCROLLABLE MENU (VISIBLE SCROLLBAR) ===== */}
-      <Box
-        sx={{
-          flexGrow: 1,
-          overflowY: "scroll", // 🔑 always visible scrollbar
-        }}
-      >
+      {/* ---------- MENU ---------- */}
+      <Box sx={{ flexGrow: 1, overflowY: "scroll" }}>
         <List>
           <Typography sx={{ fontSize: 13, fontWeight: 500, pl: 2, color: "#1976d2" }}>
             Navigation
@@ -95,15 +142,7 @@ const SideBar = ({ open }) => {
           <ListItemButton
             component={NavLink}
             to="/dashboard"
-            sx={{
-              mx: 1,
-              borderRadius: "6px",
-              color: "#555",
-              "&.active": {
-                backgroundColor: "#1976d2",
-                color: "#fff",
-              },
-            }}
+            sx={navItemStyle}
           >
             <AiOutlineHome size={18} />
             <ListItemText
@@ -124,10 +163,7 @@ const SideBar = ({ open }) => {
             Menu
           </Typography>
 
-          <ListItemButton
-            onClick={() => setMastersOpen(!mastersOpen)}
-            sx={{ mx: 1, borderRadius: "6px", color: "#555" }}
-          >
+          <ListItemButton onClick={toggleMasters} sx={navItemStyle}>
             <PiSquaresFourFill size={18} />
             <ListItemText
               primary="Masters"
@@ -142,40 +178,15 @@ const SideBar = ({ open }) => {
 
           <Collapse in={mastersOpen} timeout="auto" unmountOnExit>
             <List sx={{ ml: 3, borderLeft: "1px solid #cfcfcf" }}>
-              {masterItems.map((item) => (
+              {masterItems.map(({ path, label }) => (
                 <ListItemButton
-                  key={item.path}
+                  key={path}
                   component={NavLink}
-                  to={item.path}
-                  sx={{
-                    pl: 2,
-                    position: "relative",
-                    color: "#555",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      left: -3,
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      backgroundColor: "#9e9e9e",
-                    },
-                    "&:hover": {
-                      color: "#1976d2",
-                      backgroundColor: "transparent",
-                      "&::before": { backgroundColor: "#1976d2" },
-                    },
-                    "&.active": {
-                      color: "#1976d2",
-                      fontWeight: 600,
-                      "&::before": { backgroundColor: "#1976d2" },
-                    },
-                  }}
+                  to={path}
+                  sx={subItemStyle}
                 >
                   <ListItemText
-                    primary={item.label}
+                    primary={label}
                     slotProps={{ primary: { sx: { fontSize: 14 } } }}
                   />
                 </ListItemButton>
