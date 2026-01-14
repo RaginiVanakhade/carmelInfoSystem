@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaLock } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
-import authService from "../services/authservices";
+import authService from "../services/auth.services";
 
 
 const Login = () => {
