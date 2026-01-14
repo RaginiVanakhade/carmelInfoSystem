@@ -1,29 +1,42 @@
+import React from "react";
 import { Box, InputBase, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SearchInput = ({ value, onChange, placeholder = "Search…" }) => {
+const CustomeSearch = ({
+  value,
+  onChange,
+  placeholder = "Search…",
+  onSearch,
+ 
+}) => {
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
-        px: 2,
-        py: 0.5,
-        borderRadius: 2,
-        borderColor: "grey.300",
-        width: 300,
+        alignItems: "center"
       }}
     >
-      <SearchIcon color="action" />
-
       <InputBase
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         sx={{ ml: 1, flex: 1 }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && onSearch) {
+            onSearch(value);
+          }
+        }}
       />
+
+      <IconButton
+        onClick={() => onSearch && onSearch(value)}
+        size="small"
+        sx={{ ml: 1 }}
+      >
+        <SearchIcon />
+      </IconButton>
     </Box>
   );
 };
 
-export default SearchInput;
+export default CustomeSearch;
