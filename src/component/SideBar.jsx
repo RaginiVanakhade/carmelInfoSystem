@@ -15,7 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { AiOutlineHome } from "react-icons/ai";
 import { FaChevronDown } from "react-icons/fa";
 import { PiSquaresFourFill } from "react-icons/pi";
-import CustomeSearch from "./custom/CustomeSearch";
+import CustomSearch from "./custom/CustomSearch";
 import { masterItems } from "../listingData/SideBarItem";
 
 const NAVBAR_HEIGHT = 64;
@@ -129,7 +129,7 @@ const SideBar = ({ open }) => {
 
       {/* ---------- SEARCH ---------- */}
       <Box sx={{ p: 1, flexShrink: 0, borderBottom: "1px solid #ccc" , margin:2 }}>
-        <CustomeSearch />
+        <CustomSearch />
       </Box>
 
       {/* ---------- MENU ---------- */}

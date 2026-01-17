@@ -2,7 +2,7 @@ import React from "react";
 import { Box, InputBase, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const CustomeSearch = ({
+const CustomSearch = ({
   value,
   onChange,
   placeholder = "Search…",
@@ -39,4 +39,4 @@ const CustomeSearch = ({
   );
 };
 
-export default CustomeSearch;
+export default CustomSearch;
