@@ -1,4 +1,4 @@
-import baseUrl from "./auth"
+import{ baseUrl } from "./auth"
 
 export const CompanyReg = `${baseUrl}/companyreg`;
 export const GetCompanyMst = `${baseUrl}/getallcompany`;

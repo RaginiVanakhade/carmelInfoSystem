@@ -36,7 +36,7 @@ const CustomModal = ({
           color: "common.white",
         }}
       >
-        <Typography variant="h6" fontWeight={500}>
+        <Typography component="span"  variant="h6" fontWeight={500}>
           {title}
         </Typography>
 

@@ -1,11 +1,9 @@
 import { useState } from "react";
-import {
-  TextField,
-  Grid,
-  Button,
-} from "@mui/material";
+import { TextField, Grid, Button } from "@mui/material";
 import CustomBtn from "../custom/CustomBtn";
 import CustomModal from "../custom/CustomModal";
+import RegisterCompany from "../../services/masterservices/companymst.service";
+import CompanyMstPg from "../../pages/master/companyMstPg";
 
 const CompanyMst = () => {
   const [open, setOpen] = useState(false);
@@ -21,7 +19,6 @@ const CompanyMst = () => {
     CompM_Bank: "",
     CompM_AcNo: "",
     CompM_Ifsc: "",
-    AuthKey: "",
   });
 
   const handleChange = (e) => {
@@ -32,10 +29,19 @@ const CompanyMst = () => {
     }));
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted Data:", formData);
-    // 🔗 API call here
-    setOpen(false);
+  const handleSubmit = async () => {
+    try {
+      console.log("Submitted Data:", formData);
+
+      const res = await RegisterCompany(formData);
+
+      console.log("API Success:", res);
+
+      setOpen(false); // close modal on success
+    } catch (error) {
+      console.error("API Error:", error.message);
+      alert(error.message || "Server error");
+    }
   };
 
   return (
@@ -157,6 +163,7 @@ const CompanyMst = () => {
           </Grid>
         </Grid>
       </CustomModal>
+      <CompanyMstPg/>
     </div>
   );
 };
