@@ -1,8 +1,12 @@
-import React from 'react'
+// import React from 'react'
+import CustomDataGrid from "../../component/custom/CustomDataGrid"
 
 const CompanyMstPg = () => {
+
   return (
-    <div>CompanyMstPg</div>
+    <div>CompanyMstPg
+      <CustomDataGrid />
+    </div>
   )
 }
 
