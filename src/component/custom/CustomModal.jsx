@@ -5,6 +5,7 @@ import {
   DialogActions,
   IconButton,
   Typography,
+  Box,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -14,7 +15,7 @@ const CustomModal = ({
   title,
   children,
   actions,
-  maxWidth = "sm",
+  maxWidth = "md",
   fullWidth = true,
 }) => {
   return (
@@ -23,6 +24,11 @@ const CustomModal = ({
       onClose={onClose}
       fullWidth={fullWidth}
       maxWidth={maxWidth}
+      PaperProps={{
+        sx: {
+          borderRadius: 3,
+        },
+      }}
     >
       {/* Header */}
       <DialogTitle
@@ -30,20 +36,20 @@ const CustomModal = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          px: 2, 
-          py: 0.5,
+          px: 3,
+          py: 1.5,
           background: "linear-gradient(135deg, #1976d2, #1565c0)",
-          color: "common.white",
+          color: "#fff",
         }}
       >
-        <Typography component="span"  variant="h6" fontWeight={500}>
+        <Typography variant="h6" fontWeight={600}>
           {title}
         </Typography>
 
         <IconButton
           onClick={onClose}
           sx={{
-            color: "common.white",
+            color: "#fff",
             "&:hover": {
               backgroundColor: "rgba(255,255,255,0.15)",
             },
@@ -57,6 +63,8 @@ const CustomModal = ({
       <DialogContent
         dividers
         sx={{
+          px: 3,
+          py: 2.5,
           backgroundColor: "background.paper",
         }}
       >
@@ -67,6 +75,8 @@ const CustomModal = ({
       {actions && (
         <DialogActions
           sx={{
+            px: 3,
+            py: 2,
             backgroundColor: "background.default",
           }}
         >
