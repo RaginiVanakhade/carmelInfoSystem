@@ -4,7 +4,7 @@ import CustomDataGrid from "../../component/custom/CustomDataGrid"
 const CompanyMstPg = () => {
 
   return (
-    <div>CompanyMstPg
+    <div>
       <CustomDataGrid />
     </div>
   )

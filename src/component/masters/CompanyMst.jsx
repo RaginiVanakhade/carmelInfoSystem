@@ -49,11 +49,11 @@ const CompanyMst = () => {
   };
 
   return (
-    <Box sx={{ p: 4, backgroundColor: "#fafafa", minHeight: "100vh" }}>
+    <Box sx={{ p: 2, backgroundColor: "#fafafa", minHeight: "80vh" }}>
       {/* Header */}
       <Box
         sx={{
-          mb: 3,
+          mb: 1,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -110,9 +110,9 @@ const CompanyMst = () => {
       >
         <Box sx={{ px: 2 }}>
           {/* Company Details */}
-          <Typography fontSize={14} fontWeight={600} mb={1}>
+          {/* <Typography fontSize={14} fontWeight={600} mb={1}>
             Company details
-          </Typography>
+          </Typography> */}
           <Divider sx={{ mb: 3 }} />
 
           <Grid container spacing={2.5}>
@@ -196,9 +196,9 @@ const CompanyMst = () => {
           </Grid>
 
           {/* Banking */}
-          <Typography fontSize={14} fontWeight={600} mt={4} mb={1}>
+          {/* <Typography fontSize={14} fontWeight={600} mt={4} mb={1}>
             Banking
-          </Typography>
+          </Typography> */}
           <Divider sx={{ mb: 3 }} />
 
           <Grid container spacing={2.5}>
