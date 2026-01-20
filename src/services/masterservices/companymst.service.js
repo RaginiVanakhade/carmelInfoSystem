@@ -42,8 +42,10 @@ const GetAllCompany = async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        AuthKey: authkey,
       },
+      body: JSON.stringify({
+        AuthKey: authkey, // pass authkey in payload
+      }),
     });
 
     const result = await response.json();
