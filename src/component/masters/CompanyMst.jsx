@@ -71,7 +71,6 @@ const CompanyMst = () => {
         <CustomBtn text="New Company" onClick={() => setOpen(true)} />
       </Box>
 
-      {/* Grid container */}
       <Box
         sx={{
           border: "1px solid #e5e7eb",
@@ -82,7 +81,6 @@ const CompanyMst = () => {
         <CompanyMstPg />
       </Box>
 
-      {/* Modal */}
       <CustomModal
         open={open}
         onClose={() => setOpen(false)}
@@ -109,13 +107,8 @@ const CompanyMst = () => {
         }
       >
         <Box sx={{ px: 2 }}>
-          {/* Company Details */}
-          {/* <Typography fontSize={14} fontWeight={600} mb={1}>
-            Company details
-          </Typography> */}
           <Divider sx={{ mb: 3 }} />
-
-          <Grid container spacing={2.5}>
+          <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <TextField
                 label="Company name"
@@ -150,7 +143,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="City"
                 name="CompM_City"
@@ -161,7 +154,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="State"
                 name="CompM_State"
@@ -172,7 +165,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="GST number"
                 name="CompM_Gst"
@@ -183,7 +176,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="Authorized signatory"
                 name="CompM_AuthSign"
@@ -193,16 +186,8 @@ const CompanyMst = () => {
                 size="small"
               />
             </Grid>
-          </Grid>
 
-          {/* Banking */}
-          {/* <Typography fontSize={14} fontWeight={600} mt={4} mb={1}>
-            Banking
-          </Typography> */}
-          <Divider sx={{ mb: 3 }} />
-
-          <Grid container spacing={2.5}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="Bank name"
                 name="CompM_Bank"
@@ -213,7 +198,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 label="Account number"
                 name="CompM_AcNo"
@@ -224,7 +209,7 @@ const CompanyMst = () => {
               />
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={12} md={12}>
               <TextField
                 label="IFSC code"
                 name="CompM_Ifsc"
