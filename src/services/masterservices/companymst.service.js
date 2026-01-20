@@ -1,5 +1,5 @@
 import { authkey } from "../../api/auth";
-import { CompanyReg } from "../../api/companymst";
+import { CompanyReg ,GetCompanyMst } from "../../api/companymst";
 
 // const CompanyReg = CompanyReg
 
@@ -35,4 +35,30 @@ const RegisterCompany = async (formData) => {
   }
 };
 
-export default RegisterCompany;
+
+const GetAllCompany = async () => {
+  try {
+    const response = await fetch(GetCompanyMst, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        AuthKey: authkey,
+      },
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log("Success:", result);
+      return result;
+    } else {
+      console.error("API Error:", result);
+      alert(result.message || "Something went wrong");
+    }
+  } catch (error) {
+    console.error("Network Error:", error);
+    alert("Server error");
+  }
+};
+
+export default { RegisterCompany, GetAllCompany };
