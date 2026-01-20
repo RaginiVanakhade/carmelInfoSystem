@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import CustomBtn from "../custom/CustomBtn";
 import CustomModal from "../custom/CustomModal";
-import RegisterCompany from "../../services/masterservices/companymst.service";
+import  CompanyService from "../../services/masterservices/companymst.service";
 import CompanyMstPg from "../../pages/master/companyMstPg";
 
 const CompanyMst = () => {
@@ -37,7 +37,7 @@ const CompanyMst = () => {
     try {
       console.log("Submitted Data:", formData);
 
-      const res = await RegisterCompany(formData);
+      const res = await CompanyService.RegisterCompany(formData);
 
       console.log("API Success:", res);
 

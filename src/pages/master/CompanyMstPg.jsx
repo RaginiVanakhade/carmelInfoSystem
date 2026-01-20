@@ -1,12 +1,12 @@
 import CustomDataGrid from "../../component/custom/CustomDataGrid";
 import { useQuery } from "@tanstack/react-query";
-import GetAllCompany from "../../services/masterservices/companymst.service";
+import  CompanyService from "../../services/masterservices/companymst.service";
 import { useEffect } from "react";
 
 const CompanyMstPg = () => {
   const { data, } = useQuery({
     queryKey: ["companyList"],
-    queryFn: GetAllCompany,
+    queryFn: CompanyService.GetAllCompany,
   });
 
   useEffect(() => {
