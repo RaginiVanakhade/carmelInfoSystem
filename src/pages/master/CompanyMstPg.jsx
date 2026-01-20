@@ -11,7 +11,7 @@ const CompanyMstPg = () => {
 
   useEffect(() => {
     console.log("Fetched company Data:", data)
-  }, [])
+  }, [data])
 
 
   const columns = [
