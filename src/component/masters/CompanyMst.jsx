@@ -16,9 +16,7 @@ import { showNotification } from "../../features/notification/notificationSlice"
 import ModuleNotification from "../../features/notification/ModuleNotification";
 
 const CompanyMst = () => {
-  const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     CompM_name: "",
     CompM_AddreL1: "",
     CompM_AddreL2: "",
@@ -29,18 +27,21 @@ const CompanyMst = () => {
     CompM_Bank: "",
     CompM_AcNo: "",
     CompM_Ifsc: "",
-  });
+  };
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const closeModal = ( ) => {
-    setInterval(() => {
-setOpen(false);
+  const closeModal = () => {
+    setTimeout(() => {
+      setOpen(false);
     }, 3000);
-  }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -58,7 +59,10 @@ setOpen(false);
         }),
       );
 
-       closeModal()
+      closeModal();
+      setTimeout(() => {
+        setFormData(initialFormData);
+      }, 3000);
     } catch (error) {
       console.error("API Error:", error.message);
 
@@ -132,7 +136,7 @@ setOpen(false);
       >
         <Box sx={{ px: 2 }}>
           <Divider sx={{ mb: 3 }} />
-          <ModuleNotification position="top"/>
+          <ModuleNotification position="top" />
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <TextField
