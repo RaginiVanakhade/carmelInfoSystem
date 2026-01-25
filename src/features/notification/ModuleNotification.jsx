@@ -3,7 +3,7 @@ import { Snackbar, Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { hideNotification } from "./notificationSlice";
 
-const ModuleNotification = ({ position = "bottom" }) => {
+const ModuleNotification = ({ position = "bottom" ,  horizontal = "left"}) => {
   const dispatch = useDispatch();
   const { open, message, type } = useSelector((state) => state.notification);
 
@@ -14,10 +14,13 @@ const ModuleNotification = ({ position = "bottom" }) => {
       onClose={() => dispatch(hideNotification())}
       anchorOrigin={{
         vertical: position === "top" ? "top" : "bottom",
-        horizontal: "center",
+        horizontal,
+       
       }}
       sx={{
-        position: "absolute", // 🔥 key change
+        position: "absolute", 
+        mt: 6,
+        ml: 2
       }}
     >
       <Alert severity={type} variant="filled">

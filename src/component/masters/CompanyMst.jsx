@@ -135,8 +135,8 @@ const CompanyMst = () => {
         }
       >
         <Box sx={{ px: 2 }}>
-          <Divider sx={{ mb: 3 }} />
-          <ModuleNotification position="top" />
+          <Divider sx={{ mb: 5 }} />
+          <Box ><ModuleNotification position="top" sx={{ mt: 6, ml: 2 }} /></Box>
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <TextField
