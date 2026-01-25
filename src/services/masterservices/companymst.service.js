@@ -1,66 +1,47 @@
 import { authkey } from "../../api/auth";
-import { CompanyReg ,GetCompanyMst } from "../../api/companymst";
-
-// const CompanyReg = CompanyReg
+import { CompanyReg, GetCompanyMst } from "../../api/companymst";
 
 const RegisterCompany = async (formData) => {
-  try {
-    const payload = {
-      ...formData,
-      AuthKey: authkey,
-    };
+  const payload = {
+    ...formData,
+    AuthKey: authkey,
+  };
 
-    console.log("Submitting Payload:", payload);
+  const response = await fetch(CompanyReg, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-    const response = await fetch(CompanyReg, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+  const result = await response.json();
 
-    const result = await response.json();
-
-    if (response.ok) {
-      console.log("Success:", result);
-      alert("Company Created Successfully");
-    } else {
-      console.error("API Error:", result);
-      alert(result.message || "Something went wrong");
-    }
-  } catch (error) {
-    console.error("Network Error:", error);
-    alert("Server error");
+  if (!response.ok) {
+    throw new Error(result.message || "Company registration failed");
   }
+
+  return result;
 };
 
-
 const GetAllCompany = async () => {
-  try {
-    const response = await fetch(GetCompanyMst, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        AuthKey: authkey, // pass authkey in payload
-      }),
-    });
+  const response = await fetch(GetCompanyMst, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      AuthKey: authkey,
+    }),
+  });
 
-    const result = await response.json();
+  const result = await response.json();
 
-    if (response.ok) {
-      console.log("Success:", result);
-      return result;
-    } else {
-      console.error("API Error:", result);
-      alert(result.message || "Something went wrong");
-    }
-  } catch (error) {
-    console.error("Network Error:", error);
-    alert("Server error");
+  if (!response.ok) {
+    throw new Error(result.message || "Failed to fetch companies");
   }
+
+  return result;
 };
 
 export default { RegisterCompany, GetAllCompany };
