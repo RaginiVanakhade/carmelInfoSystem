@@ -9,12 +9,15 @@ import {
 } from "@mui/material";
 import CustomBtn from "../custom/CustomBtn";
 import CustomModal from "../custom/CustomModal";
-import  CompanyService from "../../services/masterservices/companymst.service";
+import CompanyService from "../../services/masterservices/companymst.service";
 import CompanyMstPg from "../../pages/master/companyMstPg";
+import { useDispatch } from "react-redux";
+import { showNotification } from "../../features/notification/notificationSlice";
+import ModuleNotification from "../../features/notification/ModuleNotification";
 
 const CompanyMst = () => {
   const [open, setOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     CompM_name: "",
     CompM_AddreL1: "",
@@ -33,6 +36,12 @@ const CompanyMst = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const closeModal = ( ) => {
+    setInterval(() => {
+setOpen(false);
+    }, 3000);
+  }
+
   const handleSubmit = async () => {
     try {
       console.log("Submitted Data:", formData);
@@ -41,10 +50,25 @@ const CompanyMst = () => {
 
       console.log("API Success:", res);
 
-      setOpen(false); // close modal on success
+      // Show success notification
+      dispatch(
+        showNotification({
+          message: "Company registered successfully!",
+          type: "success",
+        }),
+      );
+
+       closeModal()
     } catch (error) {
       console.error("API Error:", error.message);
-      alert(error.message || "Server error");
+
+      // Show error notification
+      dispatch(
+        showNotification({
+          message: error.message || "Server error",
+          type: "error",
+        }),
+      );
     }
   };
 
@@ -108,6 +132,7 @@ const CompanyMst = () => {
       >
         <Box sx={{ px: 2 }}>
           <Divider sx={{ mb: 3 }} />
+          <ModuleNotification position="top"/>
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <TextField
