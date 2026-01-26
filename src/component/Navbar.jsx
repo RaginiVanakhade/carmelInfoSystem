@@ -8,11 +8,21 @@ import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import CustomeUserMenu from "./custom/CustomeUserMenu";
+import { FiSettings, FiUser, FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 const NAVBAR_HEIGHT = 64;
 
 const Navbar = ({ onMenuClick }) => {
+
+    const navigate = useNavigate();
+  const handleLogout = () => {
+ 
+    localStorage.removeItem("token");
+
+    navigate("/");
+  };
   return (
     <AppBar
       position="fixed"
@@ -31,11 +41,9 @@ const Navbar = ({ onMenuClick }) => {
             alt="logo"
             sx={{ height: 32 }}
           />
-
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             Material Able
           </Typography>
-
           <IconButton color="inherit" onClick={onMenuClick}>
             <MenuIcon />
           </IconButton>
@@ -50,13 +58,17 @@ const Navbar = ({ onMenuClick }) => {
           </Badge>
         </IconButton>
 
+        {/* User Menu */}
         <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
-          <Avatar
-            src="https://i.pravatar.cc/300"
-            sx={{ width: 32, height: 32, mr: 1 }}
+          <CustomeUserMenu
+            avatarSrc="https://i.pravatar.cc/300"
+            avatarAlt="Carmel"
+            displayName="Carmel"
+            menuItems={[
+              { label: "Profile", icon: <FiUser /> },
+              { label: "Logout", icon: <FiLogOut />, onClick: handleLogout },
+            ]}
           />
-          <Typography variant="body1">Carmel</Typography>
-          <MdKeyboardArrowDown size={24} />
         </Box>
       </Toolbar>
     </AppBar>
