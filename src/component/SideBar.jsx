@@ -9,7 +9,7 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink,} from "react-router-dom";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { AiOutlineHome } from "react-icons/ai";
@@ -73,19 +73,11 @@ const subItemStyle = {
 
 const SideBar = ({ open }) => {
   const [mastersOpen, setMastersOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const toggleMasters = () => {
-    setMastersOpen((prev) => {
-      const next = !prev;
-      // navigate when opening
-      if (!prev) {
-        navigate("/masters"); // 👈 default master page
-      }
-
-      return next;
-    });
-  };
+const toggleMasters = () => {
+  setMastersOpen(prev => !prev);
+};
 
   return (
     <Drawer
