@@ -28,6 +28,15 @@ const CompanyMst = () => {
     CompM_AcNo: "",
     CompM_Ifsc: "",
   };
+
+  const requiredFields = [
+    { name: "CompM_name", label: "Company Name" },
+    { name: "CompM_AddreL1", label: "Address Line 1" },
+    { name: "CompM_City", label: "City" },
+    { name: "CompM_State", label: "State" },
+    { name: "CompM_Gst", label: "GST" },
+  ];
+
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialFormData);
@@ -37,6 +46,21 @@ const CompanyMst = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleValidation = () => {
+    for (const field of requiredFields) {
+      if (!formData[field.name]) {
+        dispatch(
+          showNotification({
+            message: `${field.label} is required`,
+            type: "error",
+          }),
+        );
+        return true; // stop after first error
+      }
+    }
+    return false; // no errors
+  };
+
   const closeModal = () => {
     setTimeout(() => {
       setOpen(false);
@@ -44,6 +68,7 @@ const CompanyMst = () => {
   };
 
   const handleSubmit = async () => {
+    if (handleValidation()) return;
     try {
       console.log("Submitted Data:", formData);
 
@@ -136,7 +161,9 @@ const CompanyMst = () => {
       >
         <Box sx={{ px: 2 }}>
           <Divider sx={{ mb: 5 }} />
-          <Box ><ModuleNotification position="top" sx={{ mt: 6, ml: 2 }} /></Box>
+          <Box>
+            <ModuleNotification position="top" sx={{ mt: 6, ml: 2 }} />
+          </Box>
           <Grid container spacing={1.5}>
             <Grid item xs={12}>
               <TextField
