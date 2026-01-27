@@ -25,10 +25,12 @@ const RegisterCompany = async (formData) => {
 };
 
 const GetAllCompany = async () => {
+  const auth = "YLkCewg6CIc0keV6DfyJ0dlqVRkmgeMp"
   const response = await fetch(GetCompanyMst, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "X-API-KEY" : auth
     },
     body: JSON.stringify({
       AuthKey: authkey,
