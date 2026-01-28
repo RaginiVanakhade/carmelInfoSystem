@@ -25,13 +25,7 @@ const CustomDataGrid = ({
         onRowClick={onRowClick}
         sx={{
           border: "none",
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#f5f5f5",
-            fontWeight: "bold",
-          },
-          "& .MuiDataGrid-row:hover": {
-            backgroundColor: "#f9f9f9",
-          },
+          fontFamily: "Segoe UI ",
         }}
         {...props} // allows passing any extra DataGrid props
       />
