@@ -30,7 +30,7 @@ const CompanyMstPg = () => {
 
   return (
     <div>
-      <CustomDataGrid rows={data?.data || []} columns={columns} />
+      <CustomDataGrid rows={data?.data || []} columns={columns}  getRowId={(row) => row.CompM_id}/>
     </div>
   );
 };
