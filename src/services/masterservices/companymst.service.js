@@ -1,5 +1,5 @@
 import { authkey, xapiekey } from "../../api/auth";
-import { CompanyReg, GetCompanyMst } from "../../api/companymst";
+import { CompanyReg, GetCompanyMst , GetCompanyById} from "../../api/companymst";
 
 
 const RegisterCompany = async (formData) => {
@@ -47,5 +47,26 @@ const GetAllCompany = async () => {
 };
 
 
+const GetComByComId = async (companyId) => {
+  const response = await fetch(GetCompanyById, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify({
+      AuthKey: authkey,
+      CompanyId: companyId,
+    }),
+  });
 
-export default { RegisterCompany, GetAllCompany };
+  const result = await response.json();
+
+  if (!response.ok || !result.status) {
+    throw new Error(result.message || "Failed to fetch companies");
+  }
+
+  return result;
+};
+
+export default { RegisterCompany, GetAllCompany, GetComByComId };

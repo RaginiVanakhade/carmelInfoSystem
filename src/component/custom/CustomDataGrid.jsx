@@ -5,10 +5,7 @@ import { Box } from "@mui/material";
 const CustomDataGrid = ({
   rows = [],
   columns = [],
-  loading = false,
   pageSize = 10,
-  checkboxSelection = false,
-  onRowClick,
   height = 500,
   ...props
 }) => {
@@ -17,12 +14,8 @@ const CustomDataGrid = ({
       <DataGrid
         rows={rows}
         columns={columns}
-        loading={loading}
         pageSize={pageSize}
         rowsPerPageOptions={[5, 10, 20, 50]}
-        checkboxSelection={checkboxSelection}
-        disableSelectionOnClick
-        onRowClick={onRowClick}
         sx={{
           border: "none",
           fontFamily: "Segoe UI ",
