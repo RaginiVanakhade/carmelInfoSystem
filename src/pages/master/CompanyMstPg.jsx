@@ -2,6 +2,7 @@ import CustomDataGrid from "../../component/custom/CustomDataGrid";
 import { useQuery } from "@tanstack/react-query";
 import  CompanyService from "../../services/masterservices/companymst.service";
 import { useEffect } from "react";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { GridActionsCellItem } from "@mui/x-data-grid";
@@ -43,6 +44,11 @@ const CompanyMstPg = () => {
     headerName: "Actions",
     width: 120,
     getActions: (params) => [
+      <GridActionsCellItem
+        icon={<VisibilityIcon />}
+        label="view"
+        onClick={() => handleEdit(params.row)}
+      />,
       <GridActionsCellItem
         icon={<EditIcon />}
         label="Edit"
