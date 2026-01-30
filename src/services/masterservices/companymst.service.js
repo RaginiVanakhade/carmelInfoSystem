@@ -1,6 +1,9 @@
 import { authkey, xapiekey } from "../../api/auth";
-import { CompanyReg, GetCompanyMst , GetCompanyById} from "../../api/companymst";
-
+import {
+  CompanyReg,
+  GetCompanyMst,
+  GetCompanyById,
+} from "../../api/companymst";
 
 const RegisterCompany = async (formData) => {
   const payload = {
@@ -46,13 +49,12 @@ const GetAllCompany = async () => {
   return result;
 };
 
-
 const GetComByComId = async (companyId) => {
   const response = await fetch(GetCompanyById, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({
       AuthKey: authkey,
@@ -70,7 +72,7 @@ const GetComByComId = async (companyId) => {
 };
 
 const UpdateCompany = async (formData) => {
-  if (!formData.CompM_Id) {
+  if (!formData.CompM_id) {
     throw new Error("Company ID is missing for update");
   }
 
@@ -95,7 +97,5 @@ const UpdateCompany = async (formData) => {
 
   return result;
 };
-
-
 
 export default { RegisterCompany, GetAllCompany, GetComByComId, UpdateCompany };

@@ -17,6 +17,7 @@ import ModuleNotification from "../../features/notification/ModuleNotification";
 
 const CompanyMst = () => {
   const initialFormData = {
+    CompM_id: null,
     CompM_name: "",
     CompM_AddreL1: "",
     CompM_AddreL2: "",
@@ -39,7 +40,7 @@ const CompanyMst = () => {
 
   const [open, setOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [isView, setIsView] = useState(false)
+  const [isView, setIsView] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialFormData);
 
@@ -74,14 +75,16 @@ const CompanyMst = () => {
     try {
       console.log("Submitted Data:", formData);
 
-      const res = await CompanyService.RegisterCompany(formData);
+      const res = isEdit ? await CompanyService.UpdateCompany(formData) : await CompanyService.RegisterCompany(formData);
 
       console.log("API Success:", res);
 
       // Show success notification
       dispatch(
         showNotification({
-          message: "Company registered successfully!",
+         message: isEdit
+  ? "Company updated successfully!"
+  : "Company registered successfully!",
           type: "success",
         }),
       );
@@ -104,23 +107,22 @@ const CompanyMst = () => {
   };
 
   const handleViewCompany = (row) => {
-    console.log("view clickd")
-           
-  setFormData(row);           
-  setOpen(true); 
-  setIsView(true)             
-};
+    console.log("view clickd");
 
-const handleEditCompany = (row) => {
-  console.log("edit clickd")
-  setIsEdit(true);           
-  setFormData(row); 
-  setOpen(true); 
-};
-const handleDeleteCompany = () => {
-  console.log("delete clickd")
+    setFormData(row);
+    setOpen(true);
+    setIsView(true);
+  };
 
-};
+  const handleEditCompany = (row) => {
+    console.log("edit clickd");
+    setIsEdit(true);
+    setFormData(row);
+    setOpen(true);
+  };
+  const handleDeleteCompany = () => {
+    console.log("delete clickd");
+  };
 
   return (
     <Box sx={{ p: 2, backgroundColor: "#fafafa", minHeight: "80vh" }}>
@@ -152,14 +154,21 @@ const handleDeleteCompany = () => {
           backgroundColor: "#fff",
         }}
       >
-        <CompanyMstPg isEdit={isEdit} setIsEdit={setIsEdit}  onView={handleViewCompany}
-  onEdit={handleEditCompany} onDelete={handleDeleteCompany} />
+        <CompanyMstPg
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          onView={handleViewCompany}
+          onEdit={handleEditCompany}
+          onDelete={handleDeleteCompany}
+        />
       </Box>
 
       <CustomModal
         open={open}
         onClose={() => setOpen(false)}
-        title={isEdit ? "Edit Company" : isView ? "View Company" : "New Company"}
+        title={
+          isEdit ? "Edit Company" : isView ? "View Company" : "New Company"
+        }
         maxWidth="md"
         actions={
           <Box
@@ -176,7 +185,7 @@ const handleDeleteCompany = () => {
               Cancel
             </Button>
             <Button variant="contained" onClick={handleSubmit}>
-               {isEdit ? "Update" : "Create"}
+              {isEdit ? "Update" : "Create"}
             </Button>
           </Box>
         }

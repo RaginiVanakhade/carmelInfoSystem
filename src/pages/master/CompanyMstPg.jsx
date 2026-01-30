@@ -1,6 +1,6 @@
 import CustomDataGrid from "../../component/custom/CustomDataGrid";
 import { useQuery } from "@tanstack/react-query";
-import  CompanyService from "../../services/masterservices/companymst.service";
+import CompanyService from "../../services/masterservices/companymst.service";
 import { useEffect } from "react";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 
 const CompanyMstPg = ({ onView, onEdit, onDelete }) => {
-  const { data, } = useQuery({
+  const { data } = useQuery({
     queryKey: ["companyList"],
     queryFn: CompanyService.GetAllCompany,
   });
@@ -17,11 +17,10 @@ const CompanyMstPg = ({ onView, onEdit, onDelete }) => {
   //   queryKey: ["companyById"],
   //   queryFn: CompanyService.GetComByComId,
   // });
-  
-  useEffect(() => {
-    console.log("Fetched company Data:", data)
-  }, [data])
 
+  useEffect(() => {
+    console.log("Fetched company Data:", data);
+  }, [data]);
 
   const columns = [
     { field: "CompM_id", headerName: "ID", width: 80 },
@@ -35,36 +34,40 @@ const CompanyMstPg = ({ onView, onEdit, onDelete }) => {
     { field: "CompM_Bank", headerName: "Bank Name", width: 160 },
     { field: "CompM_AcNo", headerName: "Account Number", width: 180 },
     { field: "CompM_Ifsc", headerName: "IFSC Code", width: 140 },
-    
-   {
-    field: "actions",
-    type: "actions",
-    headerName: "Actions",
-    width: 120,
-    getActions: (params) => [
-      <GridActionsCellItem
-        icon={<VisibilityIcon />}
-        label="view"
-        onClick={() => onView(params.row)}
-      />,
-      <GridActionsCellItem
-        icon={<EditIcon />}
-        label="Edit"
-        onClick={() => onEdit(params.row)}
-      />,
-      <GridActionsCellItem
-        icon={<DeleteIcon />}
-        label="Delete"
-        onClick={() => onDelete(params.row)}
-        sx={{ color: "error.main" }}
-      />,
-    ],
-  },
+
+    {
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
+      width: 120,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<VisibilityIcon />}
+          label="view"
+          onClick={() => onView(params.row)}
+        />,
+        <GridActionsCellItem
+          icon={<EditIcon />}
+          label="Edit"
+          onClick={() => onEdit(params.row)}
+        />,
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => onDelete(params.row)}
+          sx={{ color: "error.main" }}
+        />,
+      ],
+    },
   ];
 
   return (
     <div>
-      <CustomDataGrid rows={data?.data || []} columns={columns}  getRowId={(row) => row.CompM_id}/>
+      <CustomDataGrid
+        rows={data?.data || []}
+        columns={columns}
+        getRowId={(row) => row.CompM_id}
+      />
     </div>
   );
 };
