@@ -39,6 +39,7 @@ const CompanyMst = () => {
 
   const [open, setOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [isView, setIsView] = useState(false)
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialFormData);
 
@@ -104,9 +105,10 @@ const CompanyMst = () => {
 
   const handleViewCompany = (row) => {
     console.log("view clickd")
-  setIsEdit(false);          
+           
   setFormData(row);           
-  setOpen(true);              
+  setOpen(true); 
+  setIsView(true)             
 };
 
 const handleEditCompany = (row) => {
@@ -157,7 +159,7 @@ const handleDeleteCompany = () => {
       <CustomModal
         open={open}
         onClose={() => setOpen(false)}
-        title={isEdit ? "Edit Company" : "New Company"}
+        title={isEdit ? "Edit Company" : isView ? "View Company" : "New Company"}
         maxWidth="md"
         actions={
           <Box
