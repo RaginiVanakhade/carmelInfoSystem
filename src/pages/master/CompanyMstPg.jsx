@@ -7,23 +7,21 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 
-const CompanyMstPg = () => {
+const CompanyMstPg = ({ onView, onEdit, onDelete }) => {
   const { data, } = useQuery({
     queryKey: ["companyList"],
     queryFn: CompanyService.GetAllCompany,
   });
+
+  // const { dataById, } = useQuery({
+  //   queryKey: ["companyById"],
+  //   queryFn: CompanyService.GetComByComId,
+  // });
   
   useEffect(() => {
     console.log("Fetched company Data:", data)
   }, [data])
 
-
-  const handleEdit = () => {
-    console.log("edit clicked")
-  }
-  const handleDelete = () => {
-    console.log("delete clicked")
-  }
 
   const columns = [
     { field: "CompM_id", headerName: "ID", width: 80 },
@@ -47,17 +45,17 @@ const CompanyMstPg = () => {
       <GridActionsCellItem
         icon={<VisibilityIcon />}
         label="view"
-        onClick={() => handleEdit(params.row)}
+        onClick={() => onView(params.row)}
       />,
       <GridActionsCellItem
         icon={<EditIcon />}
         label="Edit"
-        onClick={() => handleEdit(params.row)}
+        onClick={() => onEdit(params.row)}
       />,
       <GridActionsCellItem
         icon={<DeleteIcon />}
         label="Delete"
-        onClick={() => handleDelete(params.row)}
+        onClick={() => onDelete(params.row)}
         sx={{ color: "error.main" }}
       />,
     ],

@@ -38,6 +38,7 @@ const CompanyMst = () => {
   ];
 
   const [open, setOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialFormData);
 
@@ -101,6 +102,24 @@ const CompanyMst = () => {
     }
   };
 
+  const handleViewCompany = (row) => {
+    console.log("view clickd")
+  setIsEdit(false);          
+  setFormData(row);           
+  setOpen(true);              
+};
+
+const handleEditCompany = (row) => {
+  console.log("edit clickd")
+  setIsEdit(true);           
+  setFormData(row); 
+  setOpen(true); 
+};
+const handleDeleteCompany = () => {
+  console.log("delete clickd")
+
+};
+
   return (
     <Box sx={{ p: 2, backgroundColor: "#fafafa", minHeight: "80vh" }}>
       {/* Header */}
@@ -131,13 +150,14 @@ const CompanyMst = () => {
           backgroundColor: "#fff",
         }}
       >
-        <CompanyMstPg />
+        <CompanyMstPg isEdit={isEdit} setIsEdit={setIsEdit}  onView={handleViewCompany}
+  onEdit={handleEditCompany} onDelete={handleDeleteCompany} />
       </Box>
 
       <CustomModal
         open={open}
         onClose={() => setOpen(false)}
-        title="New Company"
+        title={isEdit ? "Edit Company" : "New Company"}
         maxWidth="md"
         actions={
           <Box
@@ -154,7 +174,7 @@ const CompanyMst = () => {
               Cancel
             </Button>
             <Button variant="contained" onClick={handleSubmit}>
-              Create
+               {isEdit ? "Update" : "Create"}
             </Button>
           </Box>
         }
