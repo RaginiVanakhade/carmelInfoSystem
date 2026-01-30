@@ -98,4 +98,26 @@ const UpdateCompany = async (formData) => {
   return result;
 };
 
-export default { RegisterCompany, GetAllCompany, GetComByComId, UpdateCompany };
+const DeleteComByComId = async (companyId) => {
+  const response = await fetch(GetCompanyById, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      AuthKey: authkey,
+      CompanyId: companyId,
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok || !result.status) {
+    throw new Error(result.message || "Failed to fetch companies");
+  }
+
+  return result;
+};
+
+export default { RegisterCompany, GetAllCompany, GetComByComId, UpdateCompany , DeleteComByComId};
